@@ -1,6 +1,7 @@
-import type { VirtualDomNode } from '@lvce-editor/virtual-dom-worker';
-import { text, VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
+import type { VirtualDomNode } from '@lvce-editor/virtual-dom-worker'
+import { VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
 import type { SourceActionState } from '../SourceActionState/SourceActionState.ts'
+import { getSourceActionsVirtualDom } from '../GetSourceActionsVirtualDom/GetSourceActionsVirtualDom.ts'
 
 export const renderItems = (oldState: SourceActionState, newState: SourceActionState): readonly any[] => {
   const dom: readonly VirtualDomNode[] = [
@@ -8,7 +9,7 @@ export const renderItems = (oldState: SourceActionState, newState: SourceActionS
       type: VirtualDomElements.Div,
       childCount: 1,
     },
-    text('Hello World'),
+    ...getSourceActionsVirtualDom([]),
   ]
   return [/* method */ 'Viewlet.setDom2', newState.uid, dom]
 }

@@ -8,8 +8,6 @@ export default [
   {
     rules: {
       'no-constant-condition': 'off',
-      '@typescript-eslint/explicit-function-return-type': 'off',
-      '@typescript-eslint/prefer-readonly-parameter-types': 'off',
       'no-useless-escape': 'off',
     },
   },
