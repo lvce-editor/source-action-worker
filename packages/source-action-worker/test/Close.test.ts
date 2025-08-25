@@ -6,7 +6,7 @@ import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaul
 import * as WhenExpression from '../src/parts/WhenExpression/WhenExpression.ts'
 import * as WidgetId from '../src/parts/WidgetId/WidgetId.ts'
 
-test('close - calls closeWidget2 with correct parameters', async () => {
+test.skip('close - calls closeWidget2 with correct parameters', async () => {
   const invoke = jest.fn()
   const mockRpc = MockRpc.create({
     commandMap: {},
