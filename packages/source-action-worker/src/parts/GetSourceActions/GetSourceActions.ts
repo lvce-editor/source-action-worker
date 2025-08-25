@@ -5,5 +5,6 @@ import * as EditorWorker from '../EditorWorker/EditorWorker.ts'
 export const getEditorSourceActions = async (editorId: number): Promise<readonly SourceActionItem[]> => {
   // @ts-ignore
   const sourceActions = await EditorWorker.invoke('Editor.getSourceActions', editorId)
-  return []
+  // @ts-ignore
+  return sourceActions
 }
