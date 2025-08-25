@@ -1,4 +1,5 @@
 import type { VirtualDomNode } from '@lvce-editor/virtual-dom-worker'
+import type { SourceActionItem } from '../SourceActionItem/SourceActionItem.ts'
 import * as ClassNames from '../ClassNames/ClassNames.ts'
 import * as MergeClassNames from '../MergeClassNames/MergeClassNames.ts'
 import * as VirtualDomElements from '../VirtualDomElements/VirtualDomElements.ts'
@@ -11,7 +12,7 @@ const getActionClassName = (isFocused: boolean): string => {
   return ClassNames.SourceActionItem
 }
 
-export const getSourceActionListItemVirtualDom = (sourceAction: any): readonly VirtualDomNode[] => {
+export const getSourceActionListItemVirtualDom = (sourceAction: SourceActionItem): readonly VirtualDomNode[] => {
   const { name, isFocused } = sourceAction
   const actionClassName = getActionClassName(isFocused)
   return [
