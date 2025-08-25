@@ -5,7 +5,7 @@ export const create = (uid: number, x: number, y: number, width: number, height:
   const state: SourceActionState = {
     uid,
     items: [],
-    itemHeight: 20,
+    itemHeight: 24,
     maxHeight: 150,
     minLineY: 0,
     maxLineY: 0,

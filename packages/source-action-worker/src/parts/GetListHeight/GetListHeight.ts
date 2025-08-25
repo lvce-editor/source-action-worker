@@ -8,6 +8,8 @@ export const getListHeight = (itemsLength: number, itemHeight: number, maxHeight
   if (itemsLength === 0) {
     return emptyMessageHeight
   }
-  const totalHeight = itemsLength * itemHeight
+  const headerHeight = 26
+  const paddingBottom = 5
+  const totalHeight = itemsLength * itemHeight + headerHeight + paddingBottom
   return Math.min(totalHeight, maxHeight)
 }
