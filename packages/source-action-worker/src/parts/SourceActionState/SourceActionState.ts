@@ -1,5 +1,5 @@
 import type { Rectangle } from '../Rectangle/Rectangle.ts'
-import { VirtualListState } from '../VirtualListState/VirtualListState.ts'
+import type { VirtualListState } from '../VirtualListState/VirtualListState.ts'
 
 export interface SourceActionState extends Rectangle, VirtualListState<any> {
   readonly borderSize: number

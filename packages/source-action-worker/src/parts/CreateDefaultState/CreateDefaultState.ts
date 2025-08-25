@@ -1,4 +1,4 @@
-import { SourceActionState } from '../SourceActionState/SourceActionState.ts'
+import type { SourceActionState } from '../SourceActionState/SourceActionState.ts'
 
 export const createDefaultState = (): SourceActionState => {
   return {
