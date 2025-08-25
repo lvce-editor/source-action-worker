@@ -5,6 +5,6 @@ import * as WidgetId from '../WidgetId/WidgetId.ts'
 
 export const close = async (state: SourceActionState): Promise<SourceActionState> => {
   const { editorUid } = state
-  await EditorWorker.closeWidget(editorUid, WidgetId.Completion, 'Completions', WhenExpression.FocusEditorCompletions)
+  await EditorWorker.closeWidget(editorUid, WidgetId.SourceAction, 'SourceActions', WhenExpression.FocusSourceActions)
   return state
 }
