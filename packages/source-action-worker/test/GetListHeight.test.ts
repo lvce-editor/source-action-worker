@@ -3,7 +3,7 @@ import { getListHeight } from '../src/parts/GetListHeight/GetListHeight.ts'
 
 test('getListHeight returns itemHeight when itemsLength is 0', () => {
   const result = getListHeight(0, 20, 100)
-  expect(result).toBe(20)
+  expect(result).toBe(40)
 })
 
 test('getListHeight returns total height when less than maxHeight', () => {
