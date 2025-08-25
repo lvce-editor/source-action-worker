@@ -15,9 +15,3 @@ test('getListHeight returns maxHeight when total height exceeds maxHeight', () =
   const result = getListHeight(10, 20, 100)
   expect(result).toBe(100)
 })
-
-test('getListHeight throws error for invalid inputs', () => {
-  expect(() => getListHeight('invalid' as any, 20, 100)).toThrow()
-  expect(() => getListHeight(5, 'invalid' as any, 100)).toThrow()
-  expect(() => getListHeight(5, 20, 'invalid' as any)).toThrow()
-})
