@@ -10,6 +10,7 @@ export const loadContent = async (state: SourceActionState): Promise<SourceActio
   const wordAtOffset = await GetWordAtOffset.getWordAtOffset(editorUid)
   const { rowIndex, columnIndex, x, y } = await GetPositionAtCursor.getPositionAtCursor(editorUid)
   const actions = await GetSourceActions.getEditorSourceActions(editorUid)
+  console.log({ actions })
   const items: readonly any[] = actions
   const newMaxLineY = Math.min(items.length, 8)
   const itemsLength = items.length
