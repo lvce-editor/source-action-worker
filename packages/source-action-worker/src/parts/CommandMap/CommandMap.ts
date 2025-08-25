@@ -10,6 +10,7 @@ import * as HandleWheel from '../HandleWheel/HandleWheel.ts'
 import * as Initialize from '../Initialize/Initialize.ts'
 import * as LoadContent from '../LoadContent/LoadContent.ts'
 import * as Render2 from '../Render2/Render2.ts'
+import * as SelectItem from '../SelectItem/SelectItem.ts'
 import * as WrapCommand from '../SourceActionStates/SourceActionStates.ts'
 
 export const commandMap = {
@@ -25,5 +26,6 @@ export const commandMap = {
   'SourceActions.initialize': Initialize.initialize,
   'SourceActions.loadContent': WrapCommand.wrapCommand(LoadContent.loadContent),
   'SourceActions.render2': Render2.render2,
+  'SourceActions.selectItem': WrapCommand.wrapCommand(SelectItem.selectItem),
   'SourceActions.terminate': terminate,
 }

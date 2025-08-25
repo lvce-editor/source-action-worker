@@ -1,3 +1,4 @@
+import type { SourceActionItem } from '../SourceActionItem/SourceActionItem.ts'
 import type { SourceActionState } from '../SourceActionState/SourceActionState.ts'
 import * as GetFinalDeltaY from '../GetFinalDeltaY/GetFinalDeltaY.ts'
 import * as GetListHeight from '../GetListHeight/GetListHeight.ts'
@@ -10,7 +11,7 @@ export const loadContent = async (state: SourceActionState): Promise<SourceActio
   const wordAtOffset = await GetWordAtOffset.getWordAtOffset(editorUid)
   const { rowIndex, columnIndex, x, y } = await GetPositionAtCursor.getPositionAtCursor(editorUid)
   const actions = await GetSourceActions.getEditorSourceActions(editorUid)
-  const items: readonly any[] = actions
+  const items: readonly SourceActionItem[] = actions
   const newMaxLineY = Math.min(items.length, 8)
   const itemsLength = items.length
   const newFocusedIndex = itemsLength === 0 ? -1 : 0
