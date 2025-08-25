@@ -4,8 +4,9 @@ export const getListHeight = (itemsLength: number, itemHeight: number, maxHeight
   Assert.number(itemsLength)
   Assert.number(itemHeight)
   Assert.number(maxHeight)
+  const emptyMessageHeight = 40
   if (itemsLength === 0) {
-    return itemHeight
+    return emptyMessageHeight
   }
   const totalHeight = itemsLength * itemHeight
   return Math.min(totalHeight, maxHeight)
