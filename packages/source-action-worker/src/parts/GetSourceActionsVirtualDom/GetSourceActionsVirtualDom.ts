@@ -8,7 +8,7 @@ import * as MergeClassNames from '../MergeClassNames/MergeClassNames.ts'
 import * as VirtualDomElements from '../VirtualDomElements/VirtualDomElements.ts'
 import { text } from '../VirtualDomHelpers/VirtualDomHelpers.ts'
 
-export const getSourceActionsVirtualDom = (sourceActions: any[]): readonly VirtualDomNode[] => {
+export const getSourceActionsVirtualDom = (sourceActions: readonly any[]): readonly VirtualDomNode[] => {
   if (sourceActions.length === 0) {
     return GetEmptySourceActionsVirtualDom.getEmptySourceActionsVirtualDom()
   }
