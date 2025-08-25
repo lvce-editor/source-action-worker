@@ -1,5 +1,7 @@
-import type { Change } from '../Change/Change.ts'
+import * as ExtensionHostWorker from '../ExtensionHostWorker/ExtensionHostWorker.ts'
 
-export const getEdits = async (editorUid: number, leadingWord: string, item: any): Promise<readonly Change[]> => {
-  return []
+export const getEdits = async (editorId: number): Promise<readonly any[]> => {
+  // @ts-ignore
+  const edits = await ExtensionHostWorker.invoke('ExtensionHostOrganizeImports.execute', editorId)
+  return edits
 }
