@@ -13,17 +13,17 @@ const getActionClassName = (isFocused: boolean): string => {
 }
 
 export const getSourceActionListItemVirtualDom = (sourceAction: SourceActionItem): readonly VirtualDomNode[] => {
-  const { name, isFocused } = sourceAction
+  const { isFocused, name } = sourceAction
   const actionClassName = getActionClassName(isFocused)
   return [
     {
-      type: VirtualDomElements.Div,
-      className: actionClassName,
       childCount: 2,
+      className: actionClassName,
+      type: VirtualDomElements.Div,
     },
     {
-      type: VirtualDomElements.Div,
       className: MergeClassNames.mergeClassNames(ClassNames.SourceActionIcon, ClassNames.MaskIcon, ClassNames.MaskIconSymbolFile),
+      type: VirtualDomElements.Div,
     },
     text(name),
   ]
