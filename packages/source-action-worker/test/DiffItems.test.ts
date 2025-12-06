@@ -6,8 +6,8 @@ import { isEqual } from '../src/parts/DiffItems/DiffItems.ts'
 test('isEqual - same items and focusedIndex', () => {
   const oldState: SourceActionState = {
     ...createDefaultState(),
-    items: ['item1', 'item2'] as any[],
     focusedIndex: 1,
+    items: ['item1', 'item2'] as any[],
   }
   const newState: SourceActionState = {
     ...oldState,
@@ -22,13 +22,13 @@ test('isEqual - same items and focusedIndex', () => {
 test('isEqual - different items', () => {
   const oldState: SourceActionState = {
     ...createDefaultState(),
-    items: ['item1', 'item2'] as any,
     focusedIndex: 1,
+    items: ['item1', 'item2'] as any,
   }
   const newState: SourceActionState = {
     ...createDefaultState(),
-    items: ['item1', 'item3'] as any,
     focusedIndex: 1,
+    items: ['item1', 'item3'] as any,
   }
 
   const result = isEqual(oldState, newState)
@@ -39,13 +39,13 @@ test('isEqual - different items', () => {
 test('isEqual - different focusedIndex', () => {
   const oldState: SourceActionState = {
     ...createDefaultState(),
-    items: ['item1', 'item2'] as any,
     focusedIndex: 1,
+    items: ['item1', 'item2'] as any,
   }
   const newState: SourceActionState = {
     ...createDefaultState(),
-    items: ['item1', 'item2'] as any,
     focusedIndex: 0,
+    items: ['item1', 'item2'] as any,
   }
 
   const result = isEqual(oldState, newState)

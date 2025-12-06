@@ -15,23 +15,23 @@ export const getSourceActionsVirtualDom = (sourceActions: readonly SourceActionI
   }
   const dom: readonly VirtualDomNode[] = [
     {
-      type: VirtualDomElements.Div,
-      className: MergeClassNames.mergeClassNames(ClassNames.Viewlet, ClassNames.EditorSourceActions),
-      tabIndex: -1,
       childCount: 2,
+      className: MergeClassNames.mergeClassNames(ClassNames.Viewlet, ClassNames.EditorSourceActions),
       onFocusIn: DomEventListenerFunctions.HandleFocusIn,
+      tabIndex: -1,
+      type: VirtualDomElements.Div,
     },
     {
-      type: VirtualDomElements.Div,
-      className: ClassNames.SourceActionHeading,
       childCount: 1,
+      className: ClassNames.SourceActionHeading,
+      type: VirtualDomElements.Div,
     },
     text(EditorStrings.sourceAction()),
     {
-      type: VirtualDomElements.Div,
-      className: ClassNames.EditorSourceActionsList,
       childCount: sourceActions.length,
+      className: ClassNames.EditorSourceActionsList,
       onClick: DomEventListenerFunctions.HandleClick,
+      type: VirtualDomElements.Div,
     },
     ...sourceActions.flatMap(GetSourceActionListItemVirtualDom.getSourceActionListItemVirtualDom),
   ]

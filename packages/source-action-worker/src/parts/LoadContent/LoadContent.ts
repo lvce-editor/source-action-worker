@@ -7,9 +7,9 @@ import * as GetSourceActions from '../GetSourceActions/GetSourceActions.ts'
 import * as GetWordAtOffset from '../GetWordAtOffset/GetWordAtOffset.ts'
 
 export const loadContent = async (state: SourceActionState): Promise<SourceActionState> => {
-  const { itemHeight, maxHeight, editorUid } = state
+  const { editorUid, itemHeight, maxHeight } = state
   const wordAtOffset = await GetWordAtOffset.getWordAtOffset(editorUid)
-  const { rowIndex, columnIndex, x, y } = await GetPositionAtCursor.getPositionAtCursor(editorUid)
+  const { columnIndex, rowIndex, x, y } = await GetPositionAtCursor.getPositionAtCursor(editorUid)
   const actions = await GetSourceActions.getEditorSourceActions(editorUid)
   const items: readonly SourceActionItem[] = actions
   const newMaxLineY = Math.min(items.length, 8)
@@ -20,18 +20,18 @@ export const loadContent = async (state: SourceActionState): Promise<SourceActio
   const finalDeltaY = GetFinalDeltaY.getFinalDeltaY(height, itemHeight, total)
   return {
     ...state,
-    items,
-    x,
-    y,
-    maxLineY: newMaxLineY,
-    focusedIndex: newFocusedIndex,
+    columnIndex,
     finalDeltaY,
-    leadingWord: wordAtOffset,
+    focusedIndex: newFocusedIndex,
     height,
+    items,
+    leadingWord: wordAtOffset,
+    maxLineY: newMaxLineY,
     // @ts-ignore
     rowIndex,
-    columnIndex,
-    width: 200,
     version: 1,
+    width: 200,
+    x,
+    y,
   }
 }

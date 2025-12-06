@@ -2,6 +2,6 @@ import type { SourceActionState } from '../SourceActionState/SourceActionState.t
 import * as RenderMethod from '../RenderMethod/RenderMethod.ts'
 
 export const renderUid = (oldState: SourceActionState, newState: SourceActionState): readonly any[] => {
-  const { uid, editorUid } = newState
+  const { editorUid, uid } = newState
   return [RenderMethod.SetUid, uid, editorUid]
 }
