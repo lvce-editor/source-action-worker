@@ -20,6 +20,7 @@ export const loadContent = async (state: SourceActionState): Promise<SourceActio
   const finalDeltaY = GetFinalDeltaY.getFinalDeltaY(height, itemHeight, total)
   return {
     ...state,
+    // @ts-ignore
     columnIndex,
     finalDeltaY,
     focusedIndex: newFocusedIndex,
@@ -27,7 +28,6 @@ export const loadContent = async (state: SourceActionState): Promise<SourceActio
     items,
     leadingWord: wordAtOffset,
     maxLineY: newMaxLineY,
-    // @ts-ignore
     rowIndex,
     version: 1,
     width: 200,
