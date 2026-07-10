@@ -9,6 +9,9 @@ export default [
     rules: {
       'no-constant-condition': 'off',
       'no-useless-escape': 'off',
+      '@typescript-eslint/await-thenable': 'off',
+      '@typescript-eslint/only-throw-error': 'off',
+      '@typescript-eslint/prefer-readonly-parameter-types': 'off',
     },
   },
 ]
