@@ -9,6 +9,7 @@ export default [
     rules: {
       'no-constant-condition': 'off',
       'no-useless-escape': 'off',
+      '@typescript-eslint/only-throw-error': 'off',
     },
   },
 ]
