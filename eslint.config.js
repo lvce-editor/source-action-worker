@@ -12,6 +12,9 @@ export default [
       '@typescript-eslint/await-thenable': 'off',
       '@typescript-eslint/only-throw-error': 'off',
       '@typescript-eslint/prefer-readonly-parameter-types': 'off',
+      'jest/expect-expect': 'off',
+      'jest/no-disabled-tests': 'off',
+      'sonarjs/assertions-in-tests': 'off',
     },
   },
 ]
