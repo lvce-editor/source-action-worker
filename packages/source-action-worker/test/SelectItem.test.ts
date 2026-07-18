@@ -63,7 +63,8 @@ test('selectItem executes organize imports when the action has no edits', async 
     },
   ]
   const editorInvoke = jest.fn()
-  const extensionHostInvoke = jest.fn(() => edits)
+  const extensionHostInvoke = jest.fn<(...args: readonly unknown[]) => readonly unknown[]>()
+  extensionHostInvoke.mockReturnValue(edits)
   setEditorWorker(
     MockRpc.create({
       commandMap: {},
