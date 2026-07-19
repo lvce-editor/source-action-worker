@@ -1,4 +1,5 @@
 import type { VirtualDomNode } from '@lvce-editor/virtual-dom-worker'
+import { AriaRoles } from '@lvce-editor/virtual-dom-worker'
 import type { SourceActionItem } from '../SourceActionItem/SourceActionItem.ts'
 import * as ClassNames from '../ClassNames/ClassNames.ts'
 import * as DomEventListenerFunctions from '../DomEventListenerFunctions/DomEventListenerFunctions.ts'
@@ -31,6 +32,7 @@ export const getSourceActionsVirtualDom = (sourceActions: readonly SourceActionI
       childCount: sourceActions.length,
       className: ClassNames.EditorSourceActionsList,
       onClick: DomEventListenerFunctions.HandleClick,
+      role: AriaRoles.ListBox,
       type: VirtualDomElements.Div,
     },
     ...sourceActions.flatMap(GetSourceActionListItemVirtualDom.getSourceActionListItemVirtualDom),
