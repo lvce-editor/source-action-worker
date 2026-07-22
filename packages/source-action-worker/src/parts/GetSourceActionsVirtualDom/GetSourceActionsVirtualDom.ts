@@ -10,6 +10,12 @@ import * as MergeClassNames from '../MergeClassNames/MergeClassNames.ts'
 import * as VirtualDomElements from '../VirtualDomElements/VirtualDomElements.ts'
 import { text } from '../VirtualDomHelpers/VirtualDomHelpers.ts'
 
+const sourceActionHeadingNode: VirtualDomNode = {
+  childCount: 1,
+  className: ClassNames.SourceActionHeading,
+  type: VirtualDomElements.Div,
+}
+
 export const getSourceActionsVirtualDom = (sourceActions: readonly SourceActionItem[]): readonly VirtualDomNode[] => {
   if (sourceActions.length === 0) {
     return GetEmptySourceActionsVirtualDom.getEmptySourceActionsVirtualDom()
@@ -22,11 +28,7 @@ export const getSourceActionsVirtualDom = (sourceActions: readonly SourceActionI
       tabIndex: -1,
       type: VirtualDomElements.Div,
     },
-    {
-      childCount: 1,
-      className: ClassNames.SourceActionHeading,
-      type: VirtualDomElements.Div,
-    },
+    sourceActionHeadingNode,
     text(EditorStrings.sourceAction()),
     {
       childCount: sourceActions.length,
