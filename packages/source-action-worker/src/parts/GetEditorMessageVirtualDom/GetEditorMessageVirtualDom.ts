@@ -4,6 +4,18 @@ import * as MergeClassNames from '../MergeClassNames/MergeClassNames.ts'
 import * as VirtualDomElements from '../VirtualDomElements/VirtualDomElements.ts'
 import { text } from '../VirtualDomHelpers/VirtualDomHelpers.ts'
 
+const messageTextNode: VirtualDomNode = {
+  childCount: 1,
+  className: 'EditorMessageText',
+  type: VirtualDomElements.Div,
+}
+
+const messageTriangleNode: VirtualDomNode = {
+  childCount: 0,
+  className: 'EditorMessageTriangle',
+  type: VirtualDomElements.Div,
+}
+
 export const getEditorMessageVirtualDom = (message: string): readonly VirtualDomNode[] => {
   const dom: readonly VirtualDomNode[] = [
     {
@@ -12,17 +24,9 @@ export const getEditorMessageVirtualDom = (message: string): readonly VirtualDom
       tabIndex: -1,
       type: VirtualDomElements.Div,
     },
-    {
-      childCount: 1,
-      className: 'EditorMessageText',
-      type: VirtualDomElements.Div,
-    },
+    messageTextNode,
     text(message),
-    {
-      childCount: 0,
-      className: 'EditorMessageTriangle',
-      type: VirtualDomElements.Div,
-    },
+    messageTriangleNode,
   ]
   return dom
 }
