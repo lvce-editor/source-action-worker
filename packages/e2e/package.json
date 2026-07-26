@@ -10,6 +10,7 @@
   "type": "module",
   "license": "MIT",
   "devDependencies": {
-    "@lvce-editor/test-with-playwright": "^3.3.0"
+    "@lvce-editor/test-with-playwright": "^3.3.0",
+    "@playwright/test": "1.55.0"
   }
 }
