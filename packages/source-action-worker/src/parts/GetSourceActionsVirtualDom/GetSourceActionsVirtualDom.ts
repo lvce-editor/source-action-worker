@@ -16,18 +16,20 @@ const sourceActionHeadingNode: VirtualDomNode = {
   type: VirtualDomElements.Div,
 }
 
+const sourceActionsNode: VirtualDomNode = {
+  childCount: 2,
+  className: MergeClassNames.mergeClassNames(ClassNames.Viewlet, ClassNames.EditorSourceActions),
+  onFocusIn: DomEventListenerFunctions.HandleFocusIn,
+  tabIndex: -1,
+  type: VirtualDomElements.Div,
+}
+
 export const getSourceActionsVirtualDom = (sourceActions: readonly SourceActionItem[]): readonly VirtualDomNode[] => {
   if (sourceActions.length === 0) {
     return GetEmptySourceActionsVirtualDom.getEmptySourceActionsVirtualDom()
   }
   const dom: readonly VirtualDomNode[] = [
-    {
-      childCount: 2,
-      className: MergeClassNames.mergeClassNames(ClassNames.Viewlet, ClassNames.EditorSourceActions),
-      onFocusIn: DomEventListenerFunctions.HandleFocusIn,
-      tabIndex: -1,
-      type: VirtualDomElements.Div,
-    },
+    sourceActionsNode,
     sourceActionHeadingNode,
     text(EditorStrings.sourceAction()),
     {
