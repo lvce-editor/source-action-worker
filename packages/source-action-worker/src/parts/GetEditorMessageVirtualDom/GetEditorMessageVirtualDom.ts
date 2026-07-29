@@ -16,17 +16,14 @@ const messageTriangleNode: VirtualDomNode = {
   type: VirtualDomElements.Div,
 }
 
+const editorMessageNode: VirtualDomNode = {
+  childCount: 2,
+  className: MergeClassNames.mergeClassNames(ClassNames.Viewlet, ClassNames.EditorMessage),
+  tabIndex: -1,
+  type: VirtualDomElements.Div,
+}
+
 export const getEditorMessageVirtualDom = (message: string): readonly VirtualDomNode[] => {
-  const dom: readonly VirtualDomNode[] = [
-    {
-      childCount: 2,
-      className: MergeClassNames.mergeClassNames(ClassNames.Viewlet, ClassNames.EditorMessage),
-      tabIndex: -1,
-      type: VirtualDomElements.Div,
-    },
-    messageTextNode,
-    text(message),
-    messageTriangleNode,
-  ]
+  const dom: readonly VirtualDomNode[] = [editorMessageNode, messageTextNode, text(message), messageTriangleNode]
   return dom
 }
