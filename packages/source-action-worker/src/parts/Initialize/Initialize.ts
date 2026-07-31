@@ -1,7 +1,7 @@
-import * as CreateExtensionHostRpc from '../CreateExtensionHostRpc/CreateExtensionHostRpc.ts'
-import * as ExtensionHostWorker from '../ExtensionHostWorker/ExtensionHostWorker.ts'
+import * as CreateExtensionManagementRpc from '../CreateExtensionManagementRpc/CreateExtensionManagementRpc.ts'
+import * as ExtensionManagementWorker from '../ExtensionManagementWorker/ExtensionManagementWorker.ts'
 
 export const initialize = async (): Promise<void> => {
-  const rpc = await CreateExtensionHostRpc.createExtensionHostRpc()
-  ExtensionHostWorker.set(rpc)
+  const rpc = await CreateExtensionManagementRpc.createExtensionManagementRpc()
+  ExtensionManagementWorker.set(rpc)
 }
