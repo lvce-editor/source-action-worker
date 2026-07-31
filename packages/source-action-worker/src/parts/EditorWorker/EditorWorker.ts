@@ -1,4 +1,5 @@
 import { EditorWorker } from '@lvce-editor/rpc-registry'
+import type { PositionAtCursor } from '../PositionAtCursor/PositionAtCursor.ts'
 
 export const {
   activateByEvent,
@@ -7,13 +8,16 @@ export const {
   dispose,
   getLines,
   getOffsetAtCursor,
-  getPositionAtCursor,
   getSelections,
   getWordAt,
   getWordAtOffset2,
   getWordBefore,
   invoke,
   invokeAndTransfer,
-  sendMessagePortToExtensionHostWorker,
+  sendMessagePortToExtensionManagementWorker,
   set,
 } = EditorWorker
+
+export const getPositionAtCursor = (editorUid: number): Promise<PositionAtCursor> => {
+  return EditorWorker.getPositionAtCursor(editorUid)
+}
