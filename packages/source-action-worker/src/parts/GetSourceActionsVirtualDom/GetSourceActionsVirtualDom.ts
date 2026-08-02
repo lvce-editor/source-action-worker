@@ -24,7 +24,7 @@ const sourceActionsNode: VirtualDomNode = {
   type: VirtualDomElements.Div,
 }
 
-export const getSourceActionsVirtualDom = (sourceActions: readonly SourceActionItem[]): readonly VirtualDomNode[] => {
+export const getSourceActionsVirtualDom = (sourceActions: readonly SourceActionItem[], focusedIndex = -1): readonly VirtualDomNode[] => {
   if (sourceActions.length === 0) {
     return GetEmptySourceActionsVirtualDom.getEmptySourceActionsVirtualDom()
   }
@@ -35,11 +35,15 @@ export const getSourceActionsVirtualDom = (sourceActions: readonly SourceActionI
     {
       childCount: sourceActions.length,
       className: ClassNames.EditorSourceActionsList,
-      onClick: DomEventListenerFunctions.HandleClick,
       role: AriaRoles.ListBox,
       type: VirtualDomElements.Div,
     },
-    ...sourceActions.flatMap(GetSourceActionListItemVirtualDom.getSourceActionListItemVirtualDom),
+    ...sourceActions.flatMap((sourceAction, index) =>
+      GetSourceActionListItemVirtualDom.getSourceActionListItemVirtualDom({
+        ...sourceAction,
+        isFocused: index === focusedIndex,
+      }),
+    ),
   ]
   return dom
 }

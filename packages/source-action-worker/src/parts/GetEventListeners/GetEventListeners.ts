@@ -4,8 +4,12 @@ import * as DomEventListenerFunctions from '../DomEventListenerFunctions/DomEven
 export const getEventListeners = (): readonly DomEventListener[] => {
   return [
     {
+      name: DomEventListenerFunctions.HandleSourceActionClick,
+      params: ['handleSourceActionClick', 'event.target.dataset.name'],
+    },
+    {
       name: DomEventListenerFunctions.HandleWheel,
-      params: ['EditorCompletion.handleWheel', 'event.deltaMode', 'event.deltaY'],
+      params: ['EditorSourceAction.handleWheel', 'event.deltaMode', 'event.deltaY'],
       passive: true,
     },
   ]
