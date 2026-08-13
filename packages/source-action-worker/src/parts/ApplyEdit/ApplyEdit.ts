@@ -4,4 +4,5 @@ import * as EditorWorker from '../EditorWorker/EditorWorker.ts'
 export const applyEdit = async (editorUid: number, changes: readonly Change[]): Promise<void> => {
   // @ts-ignore
   await EditorWorker.invoke('Editor.applyDocumentEdits', editorUid, changes)
+  await EditorWorker.invoke('Editor.updateDiagnostics', editorUid)
 }

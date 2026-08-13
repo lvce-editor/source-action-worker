@@ -3,6 +3,8 @@ import { createMockRpc } from '@lvce-editor/rpc'
 import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import { set as setEditorWorker } from '../src/parts/EditorWorker/EditorWorker.ts'
 import { selectCurrent } from '../src/parts/SelectCurrent/SelectCurrent.ts'
+import * as WhenExpression from '../src/parts/WhenExpression/WhenExpression.ts'
+import * as WidgetId from '../src/parts/WidgetId/WidgetId.ts'
 
 test('applies the focused code action', async () => {
   const edits = [{ endOffset: 20, inserted: "'test'", startOffset: 14 }]
@@ -10,6 +12,7 @@ test('applies the focused code action', async () => {
     commandMap: {
       'Editor.applyDocumentEdits': jest.fn(),
       'Editor.closeWidget2': jest.fn(),
+      'Editor.updateDiagnostics': jest.fn(),
     },
   })
   setEditorWorker(editorRpc)
@@ -21,7 +24,11 @@ test('applies the focused code action', async () => {
   }
 
   await expect(selectCurrent(state)).resolves.toBe(state)
-  expect(editorRpc.invocations[0]).toEqual(['Editor.applyDocumentEdits', 42, edits])
+  expect(editorRpc.invocations).toEqual([
+    ['Editor.applyDocumentEdits', 42, edits],
+    ['Editor.updateDiagnostics', 42],
+    ['Editor.closeWidget2', 42, WidgetId.SourceAction, 'SourceActions', WhenExpression.FocusSourceActions],
+  ])
 })
 
 test('does nothing when no action is focused', async () => {
