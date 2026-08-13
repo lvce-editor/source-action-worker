@@ -12,6 +12,7 @@ test('selectItem applies edits from the selected code action', async () => {
     commandMap: {
       'Editor.applyDocumentEdits': () => undefined,
       'Editor.closeWidget2': () => undefined,
+      'Editor.updateDiagnostics': () => undefined,
     },
   })
   setEditorWorker(editorRpc)
@@ -46,6 +47,7 @@ test('selectItem applies edits from the selected code action', async () => {
   await expect(selectItem(state, "Change spelling to 'abort'")).resolves.toBe(state)
   expect(editorRpc.invocations).toEqual([
     ['Editor.applyDocumentEdits', 42, edits],
+    ['Editor.updateDiagnostics', 42],
     ['Editor.closeWidget2', 42, WidgetId.SourceAction, 'SourceActions', WhenExpression.FocusSourceActions],
   ])
 })
@@ -65,6 +67,7 @@ test('selectItem executes organize imports when the action has no edits', async 
       'Editor.getLanguageId': () => 'typescript',
       'Editor.getText': () => 'import { b, a } from "./module.js"',
       'Editor.getUri': () => 'file:///test.ts',
+      'Editor.updateDiagnostics': () => undefined,
     },
   })
   const extensionManagementRpc = createMockRpc({
@@ -102,6 +105,7 @@ test('selectItem executes organize imports when the action has no edits', async 
     ['Editor.getText', 42],
     ['Editor.getUri', 42],
     ['Editor.applyDocumentEdits', 42, edits],
+    ['Editor.updateDiagnostics', 42],
     ['Editor.closeWidget2', 42, WidgetId.SourceAction, 'SourceActions', WhenExpression.FocusSourceActions],
   ])
 })
