@@ -30,7 +30,7 @@ export const loadContent = async (state: SourceActionState): Promise<SourceActio
     maxLineY: newMaxLineY,
     rowIndex,
     version: 1,
-    width: 200,
+    width: 400,
     x,
     y,
   }
