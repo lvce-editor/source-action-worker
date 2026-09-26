@@ -13,7 +13,7 @@
     "build:watch": "./packages/build/node_modules/.bin/esbuild --format=esm --bundle --external:node:buffer --external:electron --external:ws --external:node:worker_threads --watch packages/source-action-worker/src/sourceActionWorkerMain.ts --outfile=.tmp/dist/dist/sourceActionWorkerMain.js",
     "dev": "node packages/build/src/dev.js",
     "format": "prettier --write .",
-    "lint": "eslint .",
+    "lint": "eslint . && prettier --check . && knip --no-config-hints",
     "measure": "cd packages/memory && npm run measure",
     "test": "npm test --workspaces --if-present",
     "type-check": "tsc -b"
@@ -26,6 +26,7 @@
   "devDependencies": {
     "@lvce-editor/eslint-config": "^18.4.0",
     "eslint": "^10.8.1",
+    "knip": "^6.37.0",
     "prettier": "^3.7.4",
     "typescript": "^6.0.0"
   }
