@@ -14,7 +14,7 @@
     "dev": "node packages/build/src/dev.js",
     "format": "prettier --write .",
     "lint": "eslint . && prettier --check . && knip --no-config-hints",
-    "measure": "cd packages/memory && npm run measure",
+    "measure": "cd packages/build && npm run measure",
     "test": "npm test --workspaces --if-present",
     "type-check": "tsc -b"
   },

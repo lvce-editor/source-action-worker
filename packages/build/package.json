@@ -6,8 +6,13 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "scripts": {
+    "measure": "node --experimental-strip-types src/measureMemory.ts",
+    "measure:visible": "node --experimental-strip-types src/measureMemory.ts --no-headless"
+  },
   "devDependencies": {
     "@babel/preset-typescript": "^7.27.1",
+    "@lvce-editor/measure-memory": "^1.8.1",
     "@lvce-editor/shared-process": "0.103.19",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-node-resolve": "^16.0.1",
