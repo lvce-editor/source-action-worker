@@ -12,6 +12,9 @@ export const selectItem = async (state: SourceActionState, name: string): Promis
   } else if (name === SourceActionName.OrganizeImports) {
     const edits = await GetEdits.getEdits(editorUid)
     await ApplyEdit.applyEdit(editorUid, edits)
+  } else if (item?.kind?.startsWith('source.')) {
+    const edits = await GetEdits.getEdits(editorUid, item.kind)
+    await ApplyEdit.applyEdit(editorUid, edits)
   }
   return Close.close(state)
 }

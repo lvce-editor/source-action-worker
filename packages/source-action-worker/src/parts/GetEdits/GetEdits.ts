@@ -1,7 +1,7 @@
 import * as EditorWorker from '../EditorWorker/EditorWorker.ts'
 import * as ExtensionManagementWorker from '../ExtensionManagementWorker/ExtensionManagementWorker.ts'
 
-export const getEdits = async (editorId: number): Promise<readonly any[]> => {
+export const getEdits = async (editorId: number, kind = 'source.organizeImports'): Promise<readonly any[]> => {
   const [languageId, text, uri] = await Promise.all([
     EditorWorker.invoke('Editor.getLanguageId', editorId),
     EditorWorker.invoke('Editor.getText', editorId),
@@ -13,7 +13,10 @@ export const getEdits = async (editorId: number): Promise<readonly any[]> => {
     text,
     uri,
   }
-  const { found, result } = await ExtensionManagementWorker.invoke('Extensions.executeOrganizeImportsProvider', textDocument)
+  const { found, result } =
+    kind === 'source.organizeImports'
+      ? await ExtensionManagementWorker.invoke('Extensions.executeOrganizeImportsProvider', textDocument)
+      : await ExtensionManagementWorker.invoke('Extensions.executeSourceActionProvider', textDocument, kind)
   if (!found) {
     return []
   }
