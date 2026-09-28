@@ -126,3 +126,47 @@ test('selectItem closes the widget when the selected action is no longer availab
   await expect(selectItem(state, 'Unavailable action')).resolves.toBe(state)
   expect(editorRpc.invocations).toEqual([['Editor.closeWidget2', 42, WidgetId.SourceAction, 'SourceActions', WhenExpression.FocusSourceActions]])
 })
+
+test('selectItem executes a source action by kind and applies its edits', async () => {
+  const edits = [{ endOffset: 0, inserted: "import { a } from './a'\n", startOffset: 0 }]
+  const editorRpc = createMockRpc({
+    commandMap: {
+      'Editor.applyDocumentEdits': () => undefined,
+      'Editor.closeWidget2': () => undefined,
+      'Editor.getLanguageId': () => 'typescript',
+      'Editor.getText': () => 'export const c = a + 1',
+      'Editor.getUri': () => 'file:///c.ts',
+      'Editor.updateDiagnostics': () => undefined,
+    },
+  })
+  const extensionManagementRpc = createMockRpc({
+    commandMap: {
+      'Extensions.executeSourceActionProvider': () => ({ found: true, result: edits }),
+    },
+  })
+  setEditorWorker(editorRpc)
+  setExtensionManagementWorker(extensionManagementRpc)
+  const state = {
+    ...createDefaultState(),
+    editorUid: 42,
+    items: [{ isFocused: true, kind: 'source.addMissingImports', name: 'Add All Missing Imports' }],
+  }
+  await expect(selectItem(state, 'Add All Missing Imports')).resolves.toBe(state)
+  expect(extensionManagementRpc.invocations).toEqual([
+    [
+      'Extensions.executeSourceActionProvider',
+      { documentId: 42, languageId: 'typescript', text: 'export const c = a + 1', uri: 'file:///c.ts' },
+      'source.addMissingImports',
+    ],
+  ])
+  expect(editorRpc.invocations).toContainEqual(['Editor.applyDocumentEdits', 42, edits])
+  expect(editorRpc.invocations).toContainEqual(['Editor.updateDiagnostics', 42])
+})
+
+test('selectItem does not execute an unrelated action kind', async () => {
+  const editorRpc = createMockRpc({ commandMap: { 'Editor.closeWidget2': () => undefined } })
+  setEditorWorker(editorRpc)
+  const state = { ...createDefaultState(), editorUid: 42, items: [{ isFocused: true, kind: 'quickfix', name: 'Unknown' }] }
+  await expect(selectItem(state, 'Unknown')).resolves.toBe(state)
+  expect(editorRpc.invocations).toEqual([['Editor.closeWidget2', 42, WidgetId.SourceAction, 'SourceActions', WhenExpression.FocusSourceActions]])
+})
