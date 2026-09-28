@@ -1,0 +1,22 @@
+{
+  "id": "test.source-actions",
+  "name": "Source Actions",
+  "description": "Deterministic source actions for e2e tests",
+  "activation": ["onLanguage:xyz"],
+  "browser": "dist/main.js",
+  "isolated": true,
+  "languages": [
+    {
+      "id": "xyz",
+      "extensions": [".xyz"]
+    }
+  ],
+  "codeActions": [
+    {
+      "kind": "source.organizeImports",
+      "name": "Organize Imports",
+      "command": "Editor.organizeImports",
+      "languageId": "xyz"
+    }
+  ]
+}

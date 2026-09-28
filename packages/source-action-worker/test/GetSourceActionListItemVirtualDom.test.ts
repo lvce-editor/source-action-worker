@@ -14,3 +14,15 @@ test('attaches the click listener and action name to the source action row', () 
     role: 'option',
   })
 })
+
+test('renders an unfocused source action row without the focused class', () => {
+  const result = getSourceActionListItemVirtualDom({
+    isFocused: false,
+    name: 'Extract function',
+  })
+
+  expect(result[0]).toMatchObject({
+    className: 'SourceActionItem',
+    'data-name': 'Extract function',
+  })
+})
