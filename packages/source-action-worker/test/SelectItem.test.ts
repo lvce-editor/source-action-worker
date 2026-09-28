@@ -109,3 +109,20 @@ test('selectItem executes organize imports when the action has no edits', async 
     ['Editor.closeWidget2', 42, WidgetId.SourceAction, 'SourceActions', WhenExpression.FocusSourceActions],
   ])
 })
+
+test('selectItem closes the widget when the selected action is no longer available', async () => {
+  const editorRpc = createMockRpc({
+    commandMap: {
+      'Editor.closeWidget2': () => undefined,
+    },
+  })
+  setEditorWorker(editorRpc)
+  const state = {
+    ...createDefaultState(),
+    editorUid: 42,
+    items: [],
+  }
+
+  await expect(selectItem(state, 'Unavailable action')).resolves.toBe(state)
+  expect(editorRpc.invocations).toEqual([['Editor.closeWidget2', 42, WidgetId.SourceAction, 'SourceActions', WhenExpression.FocusSourceActions]])
+})

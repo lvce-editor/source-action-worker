@@ -72,3 +72,12 @@ test('getHighlightedLabelDom - no highlights', () => {
     { childCount: 0, text: 'test', type: 12 },
   ])
 })
+
+test('getHighlightedLabelDom - highlight through end of label', () => {
+  expect(GetHighlightedLabelDom.getHighlightedLabelDom('test', [1, 4])).toEqual([
+    { childCount: 2, className: 'Label', type: 4 },
+    { childCount: 0, text: 't', type: 12 },
+    { childCount: 1, className: 'EditorCompletionItemHighlight', type: 8 },
+    { childCount: 0, text: 'est', type: 12 },
+  ])
+})
