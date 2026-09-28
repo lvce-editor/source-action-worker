@@ -5,6 +5,7 @@ import * as RenderBounds from '../src/parts/RenderBounds/RenderBounds.ts'
 import * as RenderContent from '../src/parts/RenderContent/RenderContent.ts'
 import * as RenderEventListeners from '../src/parts/RenderEventListeners/RenderEventListeners.ts'
 import * as RenderFocusContext from '../src/parts/RenderFocusContext/RenderFocusContext.ts'
+import * as RenderItems from '../src/parts/RenderItems/RenderItems.ts'
 import * as RenderUid from '../src/parts/RenderUid/RenderUid.ts'
 
 test('getRenderer', () => {
@@ -13,6 +14,7 @@ test('getRenderer', () => {
   expect(getRenderer(DiffType.RenderEventListeners)).toBe(RenderEventListeners.renderEventListeners)
   expect(getRenderer(DiffType.RenderUid)).toBe(RenderUid.renderUid)
   expect(getRenderer(DiffType.RenderFocusContext)).toBe(RenderFocusContext.renderFocusContext)
+  expect(getRenderer(DiffType.RenderItems)).toBe(RenderItems.renderItems)
 })
 
 test('getRenderer throws for unknown diff type', () => {

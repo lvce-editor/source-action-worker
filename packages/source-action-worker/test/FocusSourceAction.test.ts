@@ -22,4 +22,6 @@ test('keeps focus within the action list', () => {
   expect(FocusSourceAction.focusNext({ ...state, focusedIndex: 1 }).focusedIndex).toBe(1)
   expect(FocusSourceAction.focusPrevious(state).focusedIndex).toBe(0)
   expect(FocusSourceAction.focusPrevious({ ...state, focusedIndex: -1, items: [] }).focusedIndex).toBe(-1)
+  expect(FocusSourceAction.focusFirst({ ...state, items: [] }).focusedIndex).toBe(-1)
+  expect(FocusSourceAction.focusNext({ ...state, items: [] }).focusedIndex).toBe(-1)
 })
