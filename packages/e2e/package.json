@@ -3,15 +3,15 @@
   "version": "0.0.0-dev",
   "main": "index.js",
   "scripts": {
-    "e2e": "node ./node_modules/@lvce-editor/test-with-playwright/bin/test-with-playwright.js  --only-extension=. --test-path=.",
-    "e2e:headless": "node ./node_modules/@lvce-editor/test-with-playwright/bin/test-with-playwright.js  --only-extension=. --test-path=. --headless",
+    "e2e": "node ../../node_modules/@lvce-editor/test-with-playwright/bin/test-with-playwright.js --only-extension=. --test-path=.",
+    "e2e:headless": "node ../../node_modules/@lvce-editor/test-with-playwright/bin/test-with-playwright.js --only-extension=. --test-path=. --headless",
     "type-check": "tsc"
   },
   "type": "module",
   "license": "MIT",
   "devDependencies": {
     "@lvce-editor/api": "^9.36.0",
-    "@lvce-editor/test-with-playwright": "^3.3.0",
-    "@playwright/test": "1.55.0"
+    "@lvce-editor/test-with-playwright": "^22.38.6",
+    "@playwright/test": "1.63.0"
   }
 }
