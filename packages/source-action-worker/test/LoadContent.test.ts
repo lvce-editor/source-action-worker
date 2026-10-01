@@ -39,7 +39,7 @@ test('uses a wide popup so source action labels remain visible', async () => {
   }
   const result = await loadContent(state)
 
-  expect(result.width).toBe(400)
+  expect(result.width).toBe(536)
   expect(result.focusedIndex).toBe(0)
   expect(result.items).toHaveLength(1)
 })

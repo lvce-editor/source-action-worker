@@ -4,6 +4,7 @@ import * as GetFinalDeltaY from '../GetFinalDeltaY/GetFinalDeltaY.ts'
 import * as GetListHeight from '../GetListHeight/GetListHeight.ts'
 import * as GetPositionAtCursor from '../GetPositionAtCursor/GetPositionAtCursor.ts'
 import * as GetSourceActions from '../GetSourceActions/GetSourceActions.ts'
+import * as GetSourceActionWidth from '../GetSourceActionWidth/GetSourceActionWidth.ts'
 import * as GetWordAtOffset from '../GetWordAtOffset/GetWordAtOffset.ts'
 
 export const loadContent = async (state: SourceActionState): Promise<SourceActionState> => {
@@ -30,7 +31,7 @@ export const loadContent = async (state: SourceActionState): Promise<SourceActio
     maxLineY: newMaxLineY,
     rowIndex,
     version: 1,
-    width: 400,
+    width: GetSourceActionWidth.getSourceActionWidth(items),
     x,
     y,
   }
