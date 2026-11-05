@@ -15,6 +15,7 @@ test('merges provided code actions with unique contributed actions', async () =>
   ]
   const editorRpc = createMockRpc({
     commandMap: {
+      'Editor.getComponentState': () => ({}),
       'Editor.getLanguageId': () => 'javascript',
       'Editor.getOffsetAtCursor': () => 15,
       'Editor.getSourceActions': () => contributedActions,
@@ -53,6 +54,7 @@ test('rejects invalid code action results', async () => {
   setEditorWorker(
     createMockRpc({
       commandMap: {
+        'Editor.getComponentState': () => ({}),
         'Editor.getLanguageId': () => 'javascript',
         'Editor.getOffsetAtCursor': () => 0,
         'Editor.getSourceActions': () => [],
@@ -71,3 +73,40 @@ test('rejects invalid code action results', async () => {
 
   await expect(getEditorSourceActions(42)).rejects.toThrow('Code actions must be an array')
 })
+
+for (const applicationId of ['source', 'preview']) {
+  test(`requests code actions from the owning ${applicationId} application`, async () => {
+    setEditorWorker(
+      createMockRpc({
+        commandMap: {
+          'Editor.getComponentState': () => ({ applicationId }),
+          'Editor.getLanguageId': () => 'typescript',
+          'Editor.getOffsetAtCursor': () => 3,
+          'Editor.getSourceActions': () => [{ name: 'Organize Imports' }],
+          'Editor.getText': () => 'value',
+          'Editor.getUri': () => 'sample-source:///sample/src/main.ts',
+        },
+      }),
+    )
+    const extensionManagementRpc = createMockRpc({
+      commandMap: {
+        'Extensions.invokeForApplication': (id: string, method: string) => {
+          expect(id).toBe(applicationId)
+          expect(method).toBe('Extensions.executeCodeActionProviders')
+          return [{ name: `${applicationId} action` }]
+        },
+      },
+    })
+    setExtensionManagementWorker(extensionManagementRpc)
+    await expect(getEditorSourceActions(42)).resolves.toEqual([{ name: `${applicationId} action` }, { name: 'Organize Imports' }])
+    expect(extensionManagementRpc.invocations).toEqual([
+      [
+        'Extensions.invokeForApplication',
+        applicationId,
+        'Extensions.executeCodeActionProviders',
+        { documentId: 42, languageId: 'typescript', text: 'value', uri: 'sample-source:///sample/src/main.ts' },
+        3,
+      ],
+    ])
+  })
+}

@@ -9,6 +9,7 @@ test('uses a wide popup so source action labels remain visible', async () => {
   setEditorWorker(
     createMockRpc({
       commandMap: {
+        'Editor.getComponentState': () => ({}),
         'Editor.getLanguageId': () => 'typescript',
         'Editor.getOffsetAtCursor': () => 0,
         'Editor.getPositionAtCursor': () => ({ columnIndex: 1, rowIndex: 2, x: 100, y: 200 }),
@@ -48,6 +49,7 @@ test('starts with no focused item when there are no source actions', async () =>
   setEditorWorker(
     createMockRpc({
       commandMap: {
+        'Editor.getComponentState': () => ({}),
         'Editor.getLanguageId': () => 'typescript',
         'Editor.getOffsetAtCursor': () => 0,
         'Editor.getPositionAtCursor': () => ({ columnIndex: 1, rowIndex: 2, x: 100, y: 200 }),

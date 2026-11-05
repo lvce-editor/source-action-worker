@@ -3,7 +3,8 @@ import * as EditorWorker from '../EditorWorker/EditorWorker.ts'
 import * as ExtensionManagementWorker from '../ExtensionManagementWorker/ExtensionManagementWorker.ts'
 
 export const getEditorSourceActions = async (editorId: number): Promise<readonly SourceActionItem[]> => {
-  const [contributedActions, languageId, offset, text, uri] = await Promise.all([
+  const [{ applicationId }, contributedActions, languageId, offset, text, uri] = await Promise.all([
+    EditorWorker.invoke('Editor.getComponentState', editorId),
     EditorWorker.invoke('Editor.getSourceActions', editorId),
     EditorWorker.invoke('Editor.getLanguageId', editorId),
     EditorWorker.getOffsetAtCursor(editorId),
@@ -16,7 +17,16 @@ export const getEditorSourceActions = async (editorId: number): Promise<readonly
     text,
     uri,
   }
-  const providedActions = await ExtensionManagementWorker.invoke('Extensions.executeCodeActionProviders', textDocument, offset)
+  const providedActions =
+    applicationId === undefined
+      ? await ExtensionManagementWorker.invoke('Extensions.executeCodeActionProviders', textDocument, offset)
+      : await ExtensionManagementWorker.invoke(
+          'Extensions.invokeForApplication',
+          applicationId,
+          'Extensions.executeCodeActionProviders',
+          textDocument,
+          offset,
+        )
   if (!Array.isArray(contributedActions) || !Array.isArray(providedActions)) {
     throw new TypeError('Code actions must be an array')
   }
